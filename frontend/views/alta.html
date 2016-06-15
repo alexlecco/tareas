@@ -1,0 +1,36 @@
+<form>
+  <h3> Agregar una nueva tarea </h3>
+  <div class="has-feedback">
+    <input type="text" class="form-control" placeholder="Tarea a realizar" ng-model="tarea.nombre">
+    <span class="glyphicon glyphicon-tasks form-control-feedback"></span>
+  </div>
+  <div>
+    <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="lead prioridad"> Elige la prioridad </span>
+    <label class="radio-inline">
+      <input type="radio" ng-model="tarea.prioridad" value="Baja"> Baja
+    </label>
+    <label class="radio-inline">
+      <input type="radio" ng-model="tarea.prioridad" value="Normal"> Normal
+    </label>
+    <label class="radio-inline">
+      <input type="radio" ng-model="tarea.prioridad" value="Alta"> Alta
+    </label>
+
+    <!--        <input type="text" placeholder="Prioridad" ng-model="tarea.prioridad">-->
+  </div>
+  <button type="submit" class="btn btn-success"> Agregar </button>
+</form>
+
+<div class="todoList bg-info">
+  <h4> Tareas registradas </h4>
+  <div class="item">
+    <span class="glyphicon glyphicon-circle-arrow-up"></span>
+    <span class="glyphicon glyphicon-circle-arrow-down"></span>
+    {{ prioridad }}
+    <span>
+      <a href="#"> {{ tarea.nombre }} </a>
+      <span class="glyphicon glyphicon-edit text-warning" ui-sref="editar({id:5})"></span>
+      <span class="glyphicon glyphicon-remove text-danger"></span>
+    </span>
+  </div>
+</div>
