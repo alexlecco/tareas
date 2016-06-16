@@ -26,6 +26,14 @@ angular.module('appTareas', ['ui.router'])
 
       $scope.tarea.nombre = '';
       $scope.tarea.prioridad = '';
-
     }
+
+    $scope.masPrioridad = function(tarea) {
+      tarea.prioridad += 1;
+    }
+
+    $scope.menosPrioridad = function(tarea) {
+      tarea.prioridad -= 1;
+    }
+
   })
