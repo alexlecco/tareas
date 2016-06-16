@@ -16,10 +16,16 @@ angular.module('appTareas', ['ui.router'])
     $scope.tarea  = {}
     $scope.tareas = [];
 
+    $scope.prioridades = ['Baja', 'Normal', 'Alta'];
+
     $scope.agregar = function() {
       $scope.tareas.push({
         nombre: $scope.tarea.nombre,
         prioridad: parseInt($scope.tarea.prioridad)
       })
+
+      $scope.tarea.nombre = '';
+      $scope.tarea.prioridad = '';
+
     }
   })
