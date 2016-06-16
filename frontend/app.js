@@ -1,17 +1,20 @@
 angular.module('appTareas', ['ui.router'])
   .config(function($stateProvider, $urlRouterProvider){
     $stateProvider
-    .state('alta', {
-      url: '/alta',
-      templateUrl: 'views/alta.html',
-      controller: 'ctrlAlta'
+      .state('alta', {
+        url: '/alta',
+        templateUrl: 'views/alta.html',
+        controller: 'ctrlAlta'
+      })
+      .state('editar', {
+        url: '/editar',
+        templateUrl: 'views/editar.html',
+        controller: 'ctrlEditar'
+      });
+      $urlRouterProvider.otherwise('alta');
     })
-    .state('editar', {
-      url: '/editar/{id}',
-      templateUrl: 'views/editar.html'
-    })
-    $urlRouterProvider.otherwise('alta');
-  })
+  //.factory permite la persistencia de datos
+  //.service es similar, con la diferencia que no retorna valor
   .factory('comun', function() {
     var comun = {}
 
@@ -26,17 +29,19 @@ angular.module('appTareas', ['ui.router'])
       prioridad: '0'
     }]
 
+    comun.tarea = {};
+
     comun.eliminar = function(tarea) {
-      var indice = $scope.tareas.indexOf(tarea);
+      var indice = comun.tareas.indexOf(tarea);
       comun.tareas.splice(indice, 1);
     }
 
     return comun;
   })
-  .controller('ctrlAlta', function($scope, comun) {
+  .controller('ctrlAlta', function($scope, $state, comun) {
     $scope.tarea  = {}
     //$scope.tareas = [];
-    $scope.tareas = comun.tareas
+    $scope.tareas = comun.tareas;
 
     $scope.prioridades = ['Baja', 'Normal', 'Alta'];
 
@@ -62,4 +67,23 @@ angular.module('appTareas', ['ui.router'])
       comun.eliminar(tarea)
     }
 
+    $scope.procesaObjeto = function(tarea) {
+      comun.tarea = tarea;
+      $state.go('editar');
+    }
+
+  })
+  .controller('ctrlEditar', function($scope, $state, comun) {
+    $scope.tarea = comun.tarea;
+
+    $scope.actualizar = function() {
+      var indice = comun.tareas.indexOf(comun.tarea);
+      comun.tareas[indice] = $scope.tarea;
+      $state.go('alta');
+    }
+
+    $scope.eliminar = function() {
+      comun.eliminar($scope.tarea);
+      $state.go('alta');
+    }
   })

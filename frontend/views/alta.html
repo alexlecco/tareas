@@ -32,7 +32,7 @@
     <span class="prioridad"> Prioridad: {{ prioridades[tarea.prioridad] }}</span>
     <span>
       <a href="#"> Tarea: {{ tarea.nombre }} </a>
-      <span class="glyphicon glyphicon-edit text-warning" ui-sref="editar({id:5})"></span>
+      <span class="glyphicon glyphicon-edit text-warning" ng-click="procesaObjeto(tarea)"></span>
       <span class="glyphicon glyphicon-remove text-danger" ng-click="eliminar(tarea)"></span>
     </span>
   </div>

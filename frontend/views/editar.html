@@ -1,26 +1,31 @@
 <form>
-  <h3> Editar la tarea </h3>
+  <h3> Edita la tarea </h3>
   <div class="has-feedback">
-    <input type="text" class="form-control" placeholder="Tarea a realizar" ng-model="tarea.nombre" value="{{ tarea.nombre }}">
+    <input type="text" class="form-control" placeholder="Tarea a realizar" ng-model="tarea.nombre"
+                                            value="{{ tarea.nombre }}"></input>
     <span class="glyphicon glyphicon-tasks form-control-feedback" ></span>
   </div>
+  
   <div>
-    <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="lead prioridad"> Elige la prioridad </span>
+    <span class="glyphicon glyphicon-time"></span>&nbsp;
+    <span class="lead prioridad">
+      Elige la prioridad:
+    </span>
     <label class="radio-inline">
-      <input type="radio" ng-model="tarea.prioridad" value="Baja"> Baja
+      <input type="radio" ng-model="tarea.prioridad" value="0"> Baja
     </label>
     <label class="radio-inline">
-      <input type="radio" ng-model="tarea.prioridad" value="Normal"> Normal
+      <input type="radio" ng-model="tarea.prioridad" value="1"> Normal
     </label>
     <label class="radio-inline">
-      <input type="radio" ng-model="tarea.prioridad" value="Alta"> Alta
+      <input type="radio" ng-model="tarea.prioridad" value="2"> Alta
     </label>
     <!--        <input type="text" placeholder="Prioridad" ng-model="tarea.prioridad">-->
   </div>
 
   <div class="text-center editBtn">
-    <button class="btn btn-success btn-sm"> Actualizar </button>
-    <button class="btn btn-danger btn-sm"> Eliminar </button>
+    <button class="btn btn-success btn-sm" ng-click="actualizar()"> Actualizar </button>
+    <button class="btn btn-danger btn-sm" ng-click="eliminar()"> Eliminar </button>
   </div>
 </form>
 
