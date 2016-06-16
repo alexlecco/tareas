@@ -36,4 +36,9 @@ angular.module('appTareas', ['ui.router'])
       tarea.prioridad -= 1;
     }
 
+    $scope.eliminar = function(tarea) {
+      var indice = $scope.tareas.indexOf(tarea);
+      $scope.tareas.splice(indice, 1);
+    }
+
   })

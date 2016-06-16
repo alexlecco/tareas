@@ -5,7 +5,8 @@
     <span class="glyphicon glyphicon-tasks form-control-feedback"></span>
   </div>
   <div>
-    <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="lead prioridad"> Elige la prioridad </span>
+    <span class="glyphicon glyphicon-time"></span>&nbsp;
+    <span class="lead prioridad"> Elige la prioridad </span>
     <label class="radio-inline">
       <input type="radio" ng-model="tarea.prioridad" value="0"> Baja
     </label>
@@ -24,13 +25,15 @@
 <div class="todoList bg-info">
   <h4> Tareas registradas </h4>
   <div class="item" ng-repeat="tarea in tareas | orderBy: '-prioridad'">
-    <span class="glyphicon glyphicon-circle-arrow-up" ng-click="masPrioridad(tarea)" ng-hide="tarea.prioridad==2"></span>
-    <span class="glyphicon glyphicon-circle-arrow-down" ng-click="menosPrioridad(tarea)" ng-hide="tarea.prioridad==0"></span>
+    <span class="glyphicon glyphicon-circle-arrow-up" ng-click="masPrioridad(tarea)"
+                                                      ng-hide="tarea.prioridad==2"></span>
+    <span class="glyphicon glyphicon-circle-arrow-down" ng-click="menosPrioridad(tarea)"
+                                                        ng-hide="tarea.prioridad==0"></span>
     <span class="prioridad"> Prioridad: {{ prioridades[tarea.prioridad] }}</span>
     <span>
       <a href="#"> Tarea: {{ tarea.nombre }} </a>
       <span class="glyphicon glyphicon-edit text-warning" ui-sref="editar({id:5})"></span>
-      <span class="glyphicon glyphicon-remove text-danger"></span>
+      <span class="glyphicon glyphicon-remove text-danger" ng-click="eliminar(tarea)"></span>
     </span>
   </div>
 </div>
