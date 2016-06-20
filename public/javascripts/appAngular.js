@@ -15,19 +15,10 @@ angular.module('appTareas', ['ui.router'])
     })
   //.factory permite la persistencia de datos
   //.service es similar, con la diferencia que no retorna valor
-  .factory('comun', function() {
+  .factory('comun', function($http) {
     var comun = {}
 
-    comun.tareas = [{
-      nombre: 'Comprar comida',
-      prioridad: '1'
-    }, {
-      nombre: 'Pasear al perro',
-      prioridad: '2'
-    }, {
-      nombre: 'Ir al cine',
-      prioridad: '0'
-    }]
+    comun.tareas = [];
 
     comun.tarea = {};
 
@@ -36,11 +27,23 @@ angular.module('appTareas', ['ui.router'])
       comun.tareas.splice(indice, 1);
     }
 
+    /* Sección de métodos remotos */
+    comun.getAll = function() {
+      return $http.get('/tareas')
+      .success(function(data) {
+        angular.copy(data, comun.tareas)
+        return comun.tareas
+      })
+    }
+
     return comun;
   })
   .controller('ctrlAlta', function($scope, $state, comun) {
     $scope.tarea  = {}
     //$scope.tareas = [];
+
+    comun.getAll();
+
     $scope.tareas = comun.tareas;
 
     $scope.prioridades = ['Baja', 'Normal', 'Alta'];
