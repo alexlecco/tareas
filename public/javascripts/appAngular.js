@@ -22,11 +22,6 @@ angular.module('appTareas', ['ui.router'])
 
     comun.tarea = {};
 
-    comun.eliminar = function(tarea) {
-      var indice = comun.tareas.indexOf(tarea);
-      comun.tareas.splice(indice, 1);
-    }
-
     /* Sección de métodos remotos */
     comun.getAll = function() {
       return $http.get('/tareas')
@@ -48,6 +43,14 @@ angular.module('appTareas', ['ui.router'])
       .success(function(data) {
         var indice = comun.tareas.indexOf(tarea);
         comun.tareas[indice] = data;
+      })
+    }
+
+    comun.delete = function(tarea) {
+      return $http.delete('/tarea/' + tarea._id)
+      .success(function() {
+        var indice = comun.tareas.indexOf(tarea);
+        comun.tareas.splice(indice, 1);
       })
     }
 
@@ -82,7 +85,7 @@ angular.module('appTareas', ['ui.router'])
     }
 
     $scope.eliminar = function(tarea) {
-      comun.eliminar(tarea)
+      comun.delete(tarea);
     }
 
     $scope.procesaObjeto = function(tarea) {
@@ -100,7 +103,7 @@ angular.module('appTareas', ['ui.router'])
     }
 
     $scope.eliminar = function() {
-      comun.eliminar($scope.tarea);
+      comun.delete($scope.tarea);
       $state.go('alta');
     }
   })

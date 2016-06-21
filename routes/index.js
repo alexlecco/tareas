@@ -30,7 +30,7 @@ router.post('/tarea', function(req, res, next) {
 //Put - actualizar tarea
 router.put('/tarea/:id', function(req, res) {
   Tareas.findById(req.params.id, function(err, tarea) {
-    tarea.nombre    = req.body.nombre;
+    tarea.nombre = req.body.nombre;
     tarea.prioridad = req.body.prioridad;
     tarea.save(function(err) {
       if (err) { res.send(err) }
