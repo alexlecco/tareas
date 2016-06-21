@@ -36,6 +36,13 @@ angular.module('appTareas', ['ui.router'])
       })
     }
 
+    comun.add = function(tarea) {
+      return $http.post('/tarea', tarea)
+      .success(function(tarea) {
+        comun.tareas.push(tarea);
+      })
+    }
+
     return comun;
   })
   .controller('ctrlAlta', function($scope, $state, comun) {
@@ -49,7 +56,7 @@ angular.module('appTareas', ['ui.router'])
     $scope.prioridades = ['Baja', 'Normal', 'Alta'];
 
     $scope.agregar = function() {
-      $scope.tareas.push({
+      comun.add({
         nombre: $scope.tarea.nombre,
         prioridad: parseInt($scope.tarea.prioridad)
       })
